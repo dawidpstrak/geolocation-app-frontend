@@ -1,26 +1,37 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/Home.vue";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import store from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
+    {
+        path: '/',
+        name: 'login',
+        component: () => import('../views/Login.vue')
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () => import('../views/Register.vue')
+    },
+    {
+        path: '/geolocations',
+        name: 'geolocations',
+        component: () => import('../views/Geolocations.vue')
+    }
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
+    history: createWebHashHistory(),
+    routes
+});
+
+router.beforeEach((to, from, next) => {
+    const routesForLoggedUsers: string[] = ['geolocations'];
+
+    if (routesForLoggedUsers.some(routeName => routeName === to.name) && !store.getters.loggedUser) {
+        next({ name: 'login' });
+    }
+
+    next();
 });
 
 export default router;
