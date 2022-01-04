@@ -1,30 +1,13 @@
-# sofomo-task-dawid-client
+## Host
+
+App is hosted on heroku [https://sofomo-task-dawid-frontend.herokuapp.com/](https://sofomo-task-dawid-frontend.herokuapp.com/)
 
 ## Project setup
 
-```
+```bash
 npm install
+
 cp .env.example .env
-```
 
-### Compiles and hot-reloads for development
-
-```
 npm run serve
 ```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
